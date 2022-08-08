@@ -37,7 +37,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: systemAccentColor,
-        title: Text('Activity', style: p16.white),
+        title: Text('Fit Tracker App', style: p16.white),
         actions: [
           IconButton(
             icon: Icon(
@@ -144,6 +144,8 @@ class _DashboardPageState extends State<DashboardPage> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(action == 'create' ? 'Add Weight' : 'Update Daily Weight', style: p14.accent.bold),
+                SizedBox(height: 16),
                 TextField(
                   style: p14.black,
                   controller: _weightController,
