@@ -10,7 +10,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_tracker_app/app/utilities/account_helper.dart';
 import 'package:fit_tracker_app/app/widget/toast.dart';
 import 'package:fit_tracker_app/data/model/login_model.dart';
-import 'package:fit_tracker_app/data/model/response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 

@@ -1,8 +1,6 @@
 import 'package:fit_tracker_app/app/utilities/textstyles.dart';
 import 'package:fit_tracker_app/app/utilities/theme_helper.dart';
 import 'package:fit_tracker_app/app/widget/commons.dart';
-import 'package:fit_tracker_app/data/model/login_model.dart';
-import 'package:fit_tracker_app/data/model/response_model.dart';
 import 'package:fit_tracker_app/data/repository/engine_auth_dev.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

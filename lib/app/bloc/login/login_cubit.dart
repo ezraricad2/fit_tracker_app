@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'package:fit_tracker_app/app/bloc/authentication/authentication_cubit.dart';
 import 'package:fit_tracker_app/app/utilities/constants.dart';
 import 'package:fit_tracker_app/app/utilities/var_helper.dart';
-import 'package:fit_tracker_app/data/model/response_model.dart';
 import 'package:fit_tracker_app/data/repository/engine_auth_dev.dart';
 import 'package:flutter/foundation.dart';
 
