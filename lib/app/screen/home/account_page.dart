@@ -1,6 +1,7 @@
 import 'package:fit_tracker_app/app/screen/login/login_page.dart';
 import 'package:fit_tracker_app/app/utilities/account_helper.dart';
 import 'package:fit_tracker_app/app/utilities/assets.dart';
+import 'package:fit_tracker_app/app/utilities/datetime_helper.dart';
 import 'package:fit_tracker_app/app/utilities/routing.dart';
 import 'package:fit_tracker_app/app/utilities/textstyles.dart';
 import 'package:fit_tracker_app/app/utilities/theme_helper.dart';
@@ -15,6 +16,8 @@ class AccountPage extends StatefulWidget {
   _AccountPageState createState() => _AccountPageState();
 }
 
+enum BaseGender { male, female }
+
 class _AccountPageState extends State<AccountPage> {
   final double circleRadius = 90.0;
 
@@ -25,6 +28,8 @@ class _AccountPageState extends State<AccountPage> {
   TextEditingController _genderController = TextEditingController();
   TextEditingController _heightController = TextEditingController();
   TextEditingController _dobController = TextEditingController();
+  BaseGender _character;
+
 
   _loadUser() async {
     loginData = await APIRequest.profile.getUser();
@@ -32,8 +37,10 @@ class _AccountPageState extends State<AccountPage> {
       _emailController.text = "${loginData.email.toString()}";
       _nameController.text = "${loginData.name.toString()}";
       _genderController.text = "${loginData.gender.toString()}";
+      _character = loginData.gender == "male" ? BaseGender.male : BaseGender.female;
       _heightController.text = "${loginData.height.toString()}";
-      _dobController.text = "${loginData.dob.toString()}";
+
+      _dobController.text = "${loginData.dob.substring(0, 10)}";
     });
   }
 
@@ -46,13 +53,15 @@ class _AccountPageState extends State<AccountPage> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: systemAccentColor,
         title: Text('Profile', style: p16.semiBold.white),
       ),
-      body: Container(
+      body: SingleChildScrollView( child : Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
           color: Colors.white,
@@ -95,19 +104,34 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                 ),
                 SizedBox(height : 16),
-                TextField(
-                  style: p14.darkestGrey,
-                  controller: _genderController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
-                    fillColor: systemWhiteColor,
-                    hintText: 'Gender',
-                    hintStyle: p14.grey,
-                    labelText: 'Gender',
-                    labelStyle: p14.accent,
-                    filled: true,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  ),
+                Text("Gender"),
+                Column(
+                  children: <Widget>[
+                    ListTile(
+                      title: Text('Male'),
+                      leading: Radio<BaseGender>(
+                        value: BaseGender.male,
+                        groupValue: _character,
+                        onChanged: (BaseGender value) {
+                          setState(() {
+                            _character = value;
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text('Female'),
+                      leading: Radio<BaseGender>(
+                        value: BaseGender.female,
+                        groupValue: _character,
+                        onChanged: (BaseGender value) {
+                          setState(() {
+                            _character = value;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height : 16),
                 TextField(
@@ -144,7 +168,7 @@ class _AccountPageState extends State<AccountPage> {
               ],
             )
         ),
-      )
+      ))
     );
   }
 

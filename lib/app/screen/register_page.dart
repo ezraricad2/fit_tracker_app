@@ -6,11 +6,15 @@ import 'package:fit_tracker_app/data/model/response_model.dart';
 import 'package:fit_tracker_app/data/repository/engine_auth_dev.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
+
+enum BaseGender { male, female }
 
 class _RegisterPageState extends State<RegisterPage> {
 
@@ -20,6 +24,10 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _genderController = TextEditingController();
   TextEditingController _heightController = TextEditingController();
   TextEditingController _dobController = TextEditingController();
+
+  DateTime dateParam;
+
+  BaseGender _character;
 
   bool _hasEdited = false;
 
@@ -99,19 +107,34 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                   SizedBox(height : 16),
-                  TextField(
-                    style: p14.darkestGrey,
-                    controller: _genderController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
-                      fillColor: systemWhiteColor,
-                      hintText: 'Gender',
-                      hintStyle: p14.grey,
-                      labelText: 'Gender',
-                      labelStyle: p14.accent,
-                      filled: true,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                    ),
+                  Text("Gender"),
+                  Column(
+                    children: <Widget>[
+                      ListTile(
+                        title: Text('Male'),
+                        leading: Radio<BaseGender>(
+                          value: BaseGender.male,
+                          groupValue: _character,
+                          onChanged: (BaseGender value) {
+                            setState(() {
+                              _character = value;
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text('Female'),
+                        leading: Radio<BaseGender>(
+                          value: BaseGender.female,
+                          groupValue: _character,
+                          onChanged: (BaseGender value) {
+                            setState(() {
+                              _character = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height : 16),
                   TextField(
@@ -130,6 +153,24 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   SizedBox(height : 16),
                   TextField(
+                    onTap: () {
+                      DatePicker.showDatePicker(context,
+                          showTitleActions: true,
+                          theme: DatePickerTheme(
+                              containerHeight: 210.0,
+                              itemStyle: p14.black),
+                          onConfirm: (date) {
+
+                            String dateString = DateFormat('dd-MM-yyyy').format(date);
+                            _dobController.text  = dateString;
+
+                            setState(() {
+                              dateParam = date;
+                            });
+
+                          }, currentTime: DateTime.now(), locale: LocaleType.id);
+                    },
+                    readOnly: true,
                     style: p14.darkestGrey,
                     controller: _dobController,
                     decoration: InputDecoration(
@@ -167,7 +208,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
           await APIRequest.account.createUserFirestore(
               _emailController.text, _nameController.text,
-              _genderController.text, _heightController.text, _dobController.text);
+              _character.toString() == "BaseGender.male" ? "L" : "P", _heightController.text, dateParam.toString());
 
           Commons().snackbarInfo(context, 'Registration Success');
 

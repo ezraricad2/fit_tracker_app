@@ -21,7 +21,7 @@ class LoginModel extends Model {
   factory LoginModel.fromJson(String email, String name, String gender, String dob, String height) => LoginModel(
     email: Model.castString(email),
     name: Model.castString(name),
-    gender: Model.castString(gender == 'L' ? "Pria" : "Wanita"),
+    gender: Model.castString(gender == 'L' ? "male" : "female"),
     dob: Model.castString(dob),
     height: Model.castString(height),
   );
