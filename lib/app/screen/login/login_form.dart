@@ -34,6 +34,27 @@ class _LoginFormState extends State<LoginForm> {
     super.initState();
   }
 
+  void _login() async {
+
+    // _emailController.text = "ezraricad2@gmail.com";
+    // _passwordController.text = "123123";
+
+    if (_emailController.text.length <= 0) {
+      Commons().snackbarError(context, 'Email tidak boleh kosong');
+      return;
+    }
+    if (!_validateEmail(_emailController.text)) {
+      Commons().snackbarError(context, 'Email tidak valid');
+      return;
+    }
+    if ((_passwordController.text?.length ?? 0) <= 0) {
+      Commons().snackbarError(context, 'Password tidak boleh kosong');
+      return;
+    }
+
+    context.read<LoginCubit>().fetchLogin(_emailController.text, _passwordController.text);
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -173,43 +194,4 @@ class _LoginFormState extends State<LoginForm> {
     return regex.hasMatch(value);
   }
 
-  void _validationForgotPassword() async {
-    // if (_emailForgotPasswordController.text.length <= 0) {
-    //   Commons().snackbarError(context, 'Email tidak boleh kosong');
-    //   return;
-    // }
-    // if (!_validateEmail(_emailForgotPasswordController.text)) {
-    //   Commons().snackbarError(context, 'Email tidak valid');
-    //   return;
-    // }
-    //
-    // final result = await APIRequest.account.executeForgotPassword(_emailForgotPasswordController.text);
-    // if (result.value == 200) {
-    //   Navigator.of(context).pop();
-    //   Commons().snackbarNotification(context, 'Silahkan buka Email anda untuk mengganti Password', 3000);
-    // } else {
-    //   Navigator.of(context).pop();
-    // }
-  }
-
-  void _login() async {
-
-    // _emailController.text = "ezraricad2@gmail.com";
-    // _passwordController.text = "123123";
-
-    if (_emailController.text.length <= 0) {
-      Commons().snackbarError(context, 'Email tidak boleh kosong');
-      return;
-    }
-    if (!_validateEmail(_emailController.text)) {
-      Commons().snackbarError(context, 'Email tidak valid');
-      return;
-    }
-    if ((_passwordController.text?.length ?? 0) <= 0) {
-      Commons().snackbarError(context, 'Password tidak boleh kosong');
-      return;
-    }
-
-    context.read<LoginCubit>().fetchLogin(_emailController.text, _passwordController.text);
-  }
 }

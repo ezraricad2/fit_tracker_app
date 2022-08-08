@@ -13,23 +13,23 @@ class _Account extends VmsEngine {
 
   }
 
-  Future<ResponseModel> createUser({String email, String password}) async {
-    firebaseAuth.createUserWithEmailAndPassword(email: email, password: password).then((result) {
+  Future<UserCredential> createUserAuthentication({String email, String password}) async {
 
-      return ResponseModel(
-          messages: result.user.uid,
-          success: true
-      );
+    final UserCredential user = await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
 
-    }).catchError((err) {
+    return user;
 
-      return ResponseModel(
-          messages: err.message.toString(),
-          success: false
-      );
-
-    });
   }
+
+  createUserFirestore(String email, String nama, String gender, String height, String dob) async {
+
+    final CollectionReference listDailyActivity = FirebaseFirestore.instance.collection(
+        'user');
+
+    await listDailyActivity.add({"Email": email, "Height": int.parse(height), "Gender" : "${gender}", "Name" : "${nama}", "Dob" : "${dob}"});
+
+  }
+
 
   @override
   // TODO: implement tag

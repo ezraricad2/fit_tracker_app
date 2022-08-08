@@ -107,8 +107,8 @@ class _HomeContainerState extends State<HomeContainer> {
             onTap: onTabTapped,
             currentIndex: value,
             items: [
-              _itemBottomNavbar('Dashboard', Icons.layers, Icons.layers),
-              _itemBottomNavbar('Dashboard', Icons.layers, Icons.layers),
+              _itemBottomNavbar('Dashboard', Icons.home_filled, Icons.home_filled),
+              _itemBottomNavbar('Profile', Icons.person, Icons.person),
               // _itemBottomNavbar('Pesanan', Assets.navbarOrder, Assets.navbarOrderSelected),
               // _itemBottomNavbar('Produk', Assets.navbarProduct, Assets.navbarProductSelected),
               // _itemBottomNavbar('Laporan', Assets.navbarReport, Assets.navbarReportSelected),
@@ -123,11 +123,11 @@ class _HomeContainerState extends State<HomeContainer> {
   BottomNavigationBarItem _itemBottomNavbar(String title, IconData iconAsset, IconData selectedIconAsset) {
     return BottomNavigationBarItem(
       icon: Icon(
-        Icons.layers,
+        iconAsset,
       ),
       title: Text(title, style: p12),
       activeIcon: Icon(
-        Icons.layers,
+        selectedIconAsset,
       ),
     );
   }
