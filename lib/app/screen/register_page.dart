@@ -36,7 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
             icon: Icon(Icons.arrow_back_outlined, color: systemWhiteColor),
             onPressed: () => _onWillPop(),
           ),
-          title: Text('Atur Informasi Toko', style: p16.white),
+          title: Text('Registration', style: p16.white),
         ),
         body: Column(
           children: [
