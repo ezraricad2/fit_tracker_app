@@ -31,7 +31,6 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   void initState() {
-    _cekSavedEmailPassword();
     super.initState();
   }
 
