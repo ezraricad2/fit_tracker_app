@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "899668897505",
+    "project_id": "fit-tracker-app-64f37",
+    "storage_bucket": "fit-tracker-app-64f37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899668897505:android:e47221aeaef0a42d5851a0",
+        "android_client_info": {
+          "package_name": "com.ezra.fit_tracker_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899668897505-amr4ebspqjjl0tkpc4b2ljfqc9t28mo2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQFQHdG4daa-xITSGze-uBq-1HllEaeNg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899668897505-amr4ebspqjjl0tkpc4b2ljfqc9t28mo2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
