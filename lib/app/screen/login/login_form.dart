@@ -29,10 +29,6 @@ class _LoginFormState extends State<LoginForm> {
 
   bool _isObscure = true; // seen or unseen password
 
-  String firebaseToken;
-
-  TextEditingController _emailForgotPasswordController = TextEditingController();
-
   @override
   void initState() {
     _cekSavedEmailPassword();
@@ -199,8 +195,8 @@ class _LoginFormState extends State<LoginForm> {
 
   void _login() async {
 
-    _emailController.text = "ezraricad2@gmail.com";
-    _passwordController.text = "123123";
+    // _emailController.text = "ezraricad2@gmail.com";
+    // _passwordController.text = "123123";
 
     if (_emailController.text.length <= 0) {
       Commons().snackbarError(context, 'Email tidak boleh kosong');
@@ -217,98 +213,4 @@ class _LoginFormState extends State<LoginForm> {
 
     context.read<LoginCubit>().fetchLogin(_emailController.text, _passwordController.text);
   }
-
-  void _cekSavedEmailPassword() async {
-    // final email = await AccountHelper.getLoginEmail();
-    // final password = await AccountHelper.getLoginPassword();
-    // if (email != null && password != null) {
-    //   _emailController.text = email;
-    //   _passwordController.text = password;
-    // }
-  }
-  // widget
-
-  // Widget _buildShowPassword(BuildContext context, AdvTextFieldController controller) {
-  //   return Theme(
-  //     data: ThemeData(brightness: Brightness.light),
-  //     child: IconButton(
-  //       icon: Icon(VmsIcons.show_password),
-  //       onPressed: () {
-  //         controller.suffixIcon = _buildHidePassword(context, controller);
-  //
-  //         controller.obscureText = true;
-  //       },
-  //     ),
-  //   );
-  // }
-
-  // Widget _dialogForgotPassword() {
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return CustomDialog(
-  //         title: "",
-  //         customChild: AdvColumn(
-  //           crossAxisAlignment: CrossAxisAlignment.center,
-  //           divider: ColumnDivider(24),
-  //           children: [
-  //             Icon(Icons.vpn_key, size: 50, color: systemAccentColor),
-  //             Text("Anda ingin mengganti Password ?", style: p16.bold.darkestGrey),
-  //             TextFormField(
-  //               controller: _emailForgotPasswordController,
-  //               decoration: InputDecoration(
-  //                   labelText: 'Masukan Email Anda',
-  //                   enabledBorder: OutlineInputBorder(
-  //                     borderSide: BorderSide(color: systemAccentColor),
-  //                     borderRadius: BorderRadius.circular(8.0),
-  //                   ),
-  //                   focusedBorder: OutlineInputBorder(
-  //                     borderSide: BorderSide(color: systemAccentColor),
-  //                     borderRadius: BorderRadius.circular(8.0),
-  //                   )),
-  //             ),
-  //           ],
-  //         ),
-  //         actionButtons: <Widget>[
-  //           AdvRow(children: [
-  //             Container(
-  //                 child: FlatButton(
-  //                   color: systemWhiteColor,
-  //                   child: Text(
-  //                     "Batal",
-  //                     style: TextStyle(color: systemDarkerRedColor),
-  //                   ),
-  //                   onPressed: () {
-  //                     Navigator.of(context).pop();
-  //                   },
-  //                 )),
-  //             Container(
-  //               child: FlatButton(
-  //                   color: systemWhiteColor,
-  //                   child: Text(
-  //                     "Ya",
-  //                     style: TextStyle(color: systemBlackGreyColor),
-  //                   ),
-  //                   onPressed: () => _validationForgotPassword()),
-  //             )
-  //           ])
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
-
-  // Widget _buildHidePassword(BuildContext context, AdvTextFieldController controller) {
-  //   return Theme(
-  //     data: ThemeData(brightness: Brightness.light),
-  //     child: IconButton(
-  //       icon: Icon(VmsIcons.hide_password),
-  //       onPressed: () {
-  //         controller.suffixIcon = _buildShowPassword(context, controller);
-  //
-  //         controller.obscureText = false;
-  //       },
-  //     ),
-  //   );
-  // }
 }
